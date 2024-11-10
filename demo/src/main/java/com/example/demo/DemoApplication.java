@@ -1,23 +1,26 @@
-//package com.example.demo;
-//
-//import org.springframework.boot.SpringApplication;
-//import org.springframework.boot.autoconfigure.SpringBootApplication;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.RequestParam;
-//import org.springframework.web.bind.annotation.RestController;
-//
-//@SpringBootApplication
-//public class DemoApplication {
-//
-//	public static void main(String[] args) {
-//		SpringApplication.run(DemoApplication.class, args);
-//	}
-//	@RestController
-//	public class greetClass  {
-//
-//		@GetMapping("/greet")
-//		public String printFunction(@RequestParam String world) {
-//			return "Hello, "+world;
-//		}
-//	}
-//}
+package com.example.demo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.*;
+
+@SpringBootApplication
+public class DemoApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, args);
+    }
+    @RestController
+    public class greetClass  {
+        @GetMapping("/greet")
+        String printFunction(@RequestParam(required = false, defaultValue = "friend") String name) {
+            return "Hello, "+ name;
+        }
+
+
+        @PostMapping("/farewell")
+        String goodbye(@RequestBody String name) {
+            System.out.println("Goodbye, "+name);
+            return "Goodbye, "+ name;
+        }
+    }
+}
